@@ -14,7 +14,7 @@ def print_user_tweets(user):
     with open('file.txt', 'a', encoding='utf-8') as file:
         for tweet in get_tweets(user):
             print(tweet.retweet_count)
-            file.write('{0}\n{1}\n{2}\n{3}\n'.format(str(tweet.created_at), tweet.author.name, tweet.text, tweet.retweet_count))
+            file.write('{0}\n{1}\n{2}\n{3}\n'.format(str(tweet.created_at), tweet.author.name, str(tweet.text).replace("\n"," "), tweet.retweet_count))
 
 
 with open('file.txt', 'w') as file:
