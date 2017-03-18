@@ -1,9 +1,15 @@
 from flask import Flask
+from flask import request
+from flask import render_template
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def overview():
-    return 'The most sentimental politician this week: Donald Trump'
+    if request.method == 'POST':
+        return render_template('hello.html')
+    else:
+        return render_template('hello2.html')
+
 
 """
 HOW TO RUN THE WEB APP ON LOCAL SERVER:
