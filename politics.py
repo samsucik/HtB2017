@@ -6,9 +6,11 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def overview():
     if request.method == 'POST':
-        return render_template('hello.html')
+        return "abc" # render_template('hello.html')
     else:
-        return render_template('hello2.html')
+        """We will take all the plots
+        """
+        return "abcd" #render_template('hello2.html')
 
 
 """
