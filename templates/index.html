@@ -14,7 +14,15 @@
   	<script type="text/javascript" src="/static/script.js"></script>
   	<script type="text/javascript">
   		var autocompletionData = {{ politicians_dct|safe }};
-  		{% %}
+			var politicians_dct = {{ politicians_dct|safe}}
+			var top5posit_sent = {{ top5posit_sent|safe}}
+			var top5neg_sent = {{ top5neg_sent|safe}}
+			var top5posrise_sent = {{ top5posrise_sent|safe}}
+			var top5negdec_sent = {{ top5negdec_sent|safe}}
+			var top5posit_subj = {{ top5posit_subj|safe}}
+			var top5neg_subj = {{ top5neg_subj|safe}}
+			var top5posrise_subj = {{ top5posrise_subj|safe}}
+			var top5negdec_subj = {{ top5negdec_subj|safe}}
   		// console.log(autocompletionData);
   	</script>
 </head>
@@ -28,7 +36,7 @@
 	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
 	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
 	</div>
-	  
+
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	  	<form id="searchForm">
@@ -40,13 +48,13 @@
 	  </div>
 	</nav>
 
-	<div class="container text-center profile-row">  
+	<div class="container text-center profile-row">
 		<div class="col-lg-3 profile">
 			<img src="/static/nicola.jpg" class="image">
 			<br>
 			<a class="nickname" href="https://twitter.com/NicolaSturgeon">@NicolaSturgeon</a>
 		</div>
-		
+
 		<div class="col-lg-9 graph personal" id="personalSentimentWeekly">
 			<div class="bar"></div>
 		</div>
