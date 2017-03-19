@@ -3,6 +3,7 @@ from flask import request
 from flask import render_template
 from datetime import datetime
 import sentiment_analysis_big
+from flask import jsonify
 
 import json
 app = Flask(__name__)
@@ -59,7 +60,16 @@ def overview():
             # open the json file and get the data
             # receive nick, send stuff
             # pass also data for the most similar politicians
-            return render_template('index.html', today=today, politicians_dct=politicians_dct, top3sent=top3sent, top3subj=top3subj, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
+            return jsonify(
+                           today=today,
+                           politicians_dct=politicians_dct,
+                           top3sent=top3sent,
+                           top3subj=top3subj,
+                           sentiment_scores=sentiment_scores[polit_name],
+                           subj_scores=subj_scores[polit_name],
+                           tweets_by_politicians=tweets_by_politicians
+                          )
+            # return render_template('index.html', )
         except:
             # display the main page
 
