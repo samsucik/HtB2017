@@ -183,6 +183,9 @@ def get_last_subj_ranking(polit_weekly_scores):
     last_scores.sort(key=lambda x: x[1])
     return last_scores
 
+def get_people_biggest_change(polit_weekly_scores):
+    
+
 create_json_big()
 a = get_weekly_sentiments()
 b = get_weekly_subjectivity()
