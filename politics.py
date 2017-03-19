@@ -35,7 +35,8 @@ def overview():
         last_subj_ranking = sentiment_analysis_big.get_last_subj_ranking(subj_scores)
         similar_people_sent = sentiment_analysis_big.get_similar_people(polit_name, sentiment_scores)
         similar_people_subj = sentiment_analysis_big.get_similar_people_subj(polit_name, subj_scores)
-
+        changes_em = sentiment_analysis_big.get_people_biggest_change(sentiment_scores)
+        changes_subj = sentiment_analysis_big.get_people_biggest_change(subj_scores)
         """What we need?
 
         The scores for both weekly sentiment and subjectivity for the given

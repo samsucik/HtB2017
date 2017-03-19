@@ -184,7 +184,13 @@ def get_last_subj_ranking(polit_weekly_scores):
     return last_scores
 
 def get_people_biggest_change(polit_weekly_scores):
-    
+    pol_tuples = []
+    for name in polit_weekly_scores:
+        pol_tuples.append((name, polit_weekly_scores[name][0]-polit_weekly_scores[name][1]))
+    pol_tuples.sort(reverse=True)
+    return pol_tuples
+
+
 
 create_json_big()
 a = get_weekly_sentiments()
@@ -197,3 +203,7 @@ print("Most similar people to Donald Trump in terms of emotions:")
 print(get_similar_people('realDonaldTrump', a))
 print("Most similar people to Donald Trump in terms of subjectivity:")
 print(get_similar_people('realDonaldTrump', b))
+print("People with the biggest change in emotions (ordered):")
+print(get_people_biggest_change(a))
+print("People with the biggest change in subjectivity (ordered):")
+print(get_people_biggest_change(b))
