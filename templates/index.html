@@ -14,15 +14,15 @@
   	<script type="text/javascript" src="/static/script.js"></script>
   	<script type="text/javascript">
   		var autocompletionData = {{ politicians_dct|safe }};
-			var politicians_dct = {{ politicians_dct|safe}}
-			var top5posit_sent = {{ top5posit_sent|safe}}
-			var top5neg_sent = {{ top5neg_sent|safe}}
-			var top5posrise_sent = {{ top5posrise_sent|safe}}
-			var top5negdec_sent = {{ top5negdec_sent|safe}}
-			var top5posit_subj = {{ top5posit_subj|safe}}
-			var top5neg_subj = {{ top5neg_subj|safe}}
-			var top5posrise_subj = {{ top5posrise_subj|safe}}
-			var top5negdec_subj = {{ top5negdec_subj|safe}}
+		var politicians_dct = {{ politicians_dct|safe}}
+		var top5posit_sent = {{ top5posit_sent|safe}}
+		var top5neg_sent = {{ top5neg_sent|safe}}
+		var top5posrise_sent = {{ top5posrise_sent|safe}}
+		var top5negdec_sent = {{ top5negdec_sent|safe}}
+		var top5posit_subj = {{ top5posit_subj|safe}}
+		var top5neg_subj = {{ top5neg_subj|safe}}
+		var top5posrise_subj = {{ top5posrise_subj|safe}}
+		var top5negdec_subj = {{ top5negdec_subj|safe}}
   		// console.log(autocompletionData);
   	</script>
 </head>
@@ -51,6 +51,8 @@
 	<div class="container text-center profile-row">
 		<div class="col-lg-3 profile">
 			<img src="/static/nicola.jpg" class="image">
+			<br>
+			<span class="normal_name">Nicola Sturgeon</span>
 			<br>
 			<a class="nickname" href="https://twitter.com/NicolaSturgeon">@NicolaSturgeon</a>
 		</div>
@@ -83,6 +85,51 @@
 	</div>
 
 	<div class="container text-center stats-row">
+		<div class="col-md-6 table-stats left">
+			<h3>Most positive sentiment</h3>
+			<div id="top5posit_sent"></div>
+		</div>
+
+		<div class="col-md-6 table-stats">
+			<h3>Most negative sentiment</h3>
+			<div id="top5neg_sent"></div>
+		</div>
+
+		<div class="divider col-lg-12"></div>
+
+		<div class="col-md-6 table-stats left">
+			<h3>Highest sentiment increase</h3>
+			<div id="top5posrise_sent"></div>
+		</div>
+
+		<div class="col-md-6 table-stats">
+			<h3>Lowest sentiment increase</h3>
+			<div id="top5negdec_sent"></div>
+		</div>
+
+		<div class="divider col-lg-12"></div>
+
+		<div class="col-md-6 table-stats left">
+			<h3>Most subjective</h3>
+			<div id="top5posit_subj"></div>
+		</div>
+
+		<div class="col-md-6 table-stats">
+			<h3>Most objective</h3>
+			<div id="top5neg_subj"></div>
+		</div>
+
+		<div class="divider col-lg-12"></div>
+
+		<div class="col-md-6 table-stats left">
+			<h3>Highest increase in subjectivity</h3>
+			<div id="top5posrise_subj"></div>
+		</div>
+
+		<div class="col-md-6 table-stats">
+			<h3>Lowest increase in subjectivity</h3>
+			<div id="top5negdec_subj"></div>
+		</div>
 	</div>
 
 	<footer class="container-fluid text-center">

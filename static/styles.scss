@@ -2,12 +2,14 @@
 $search-height: 50px;
 $blue: #0084b4;
 $blue_l: #1dcaff;
+$dark: rgb(100,100,100);
 
 .navbar {
   margin-bottom: 0;
   border-radius: 0;
   height: $search-height+5;
   border: 0;
+  border-top: 4px solid $dark;
 
   #search {
     display: inline-block;
@@ -95,6 +97,11 @@ $blue_l: #1dcaff;
       table {
         width: 100%;
 
+        thead th {
+          background: $dark;
+          color: white;
+        }
+
         th {
           text-align: center;
         }
@@ -149,11 +156,31 @@ $row-height: 300px;
       font-weight: bold;
       font-style: italic;
     }
+    .normal_name {
+      width: 100%;
+      color: white;
+      font-weight: bold;
+    }
   }
 }
 
 .stats-row {
+  .table-stats {
+    padding: 20px;
 
+    &.left {
+      border-right: 2px solid rgb(50,50,50);
+    }
+
+    th {
+      text-align: center;
+    }
+
+    thead th {
+      background: $dark;
+      color: white;
+    }
+  }
 }
 
 .bar {

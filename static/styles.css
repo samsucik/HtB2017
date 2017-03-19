@@ -3,7 +3,8 @@
   margin-bottom: 0;
   border-radius: 0;
   height: 55px;
-  border: 0; }
+  border: 0;
+  border-top: 4px solid #646464; }
   .navbar #search {
     display: inline-block;
     left: 0;
@@ -66,6 +67,9 @@
       width: 100%; }
       .container .table-personal #similarBySentiment table, .container .table-personal #similarBySubjectivity table {
         width: 100%; }
+        .container .table-personal #similarBySentiment table thead th, .container .table-personal #similarBySubjectivity table thead th {
+          background: #646464;
+          color: white; }
         .container .table-personal #similarBySentiment table th, .container .table-personal #similarBySubjectivity table th {
           text-align: center; }
 
@@ -104,6 +108,20 @@ footer {
       color: white;
       font-weight: bold;
       font-style: italic; }
+    .profile-row .profile .normal_name {
+      width: 100%;
+      color: white;
+      font-weight: bold; }
+
+.stats-row .table-stats {
+  padding: 20px; }
+  .stats-row .table-stats.left {
+    border-right: 2px solid #323232; }
+  .stats-row .table-stats th {
+    text-align: center; }
+  .stats-row .table-stats thead th {
+    background: #646464;
+    color: white; }
 
 .bar {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00f000+0,dcff00+54,ff0000+100 */

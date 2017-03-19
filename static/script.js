@@ -1,5 +1,59 @@
 var blue = '#0084b4';
 $(document).ready(function(){
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+	for (i = 0; i < top5posit_sent.length; i++) {
+	html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[top5posit_sent[i][0]] + '</td><td>' + Math.ceil(top5posit_sent[i][1]*100)/100 + '</td></tr>';
+	}
+		html += '</tbody></table>';
+	$("#top5posit_sent").html(html);
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+	for (i = 0; i < top5neg_sent.length; i++) {
+	html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[top5neg_sent[i][0]] + '</td><td>' + Math.ceil(top5neg_sent[i][1]*100)/100 + '</td></tr>';
+	}
+		html += '</tbody></table>';
+	$("#top5neg_sent").html(html);
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+	for (i = 0; i < top5posrise_sent.length; i++) {
+	html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[top5posrise_sent[i][0]] + '</td><td>' + Math.ceil(top5posrise_sent[i][1]*100)/100 + '</td></tr>';
+	}
+	html += '</tbody></table>';
+	$("#top5posrise_sent").html(html);
+	
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+	for (i = 0; i < top5negdec_sent.length; i++) {
+		html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[top5negdec_sent[i][0]] + '</td><td>' + Math.ceil(top5negdec_sent[i][1]*100)/100 + '</td></tr>';
+	}
+	html += '</tbody></table>';
+	$("#top5negdec_sent").html(html);
+	
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+	for (i = 0; i < top5posit_subj.length; i++) {
+		html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[top5posit_subj[i][0]] + '</td><td>' + Math.ceil(top5posit_subj[i][1]*100)/100 + '</td></tr>';
+	}
+	html += '</tbody></table>';
+	$("#top5posit_subj").html(html);
+	
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+	for (i = 0; i < top5neg_subj.length; i++) {
+		html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[top5neg_subj[i][0]] + '</td><td>' + Math.ceil(top5neg_subj[i][1]*100)/100 + '</td></tr>';
+	}
+	html += '</tbody></table>';
+	$("#top5neg_subj").html(html);
+	
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+	for (i = 0; i < top5posrise_subj.length; i++) {
+		html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[top5posrise_subj[i][0]] + '</td><td>' + Math.ceil(top5posrise_subj[i][1]*100)/100 + '</td></tr>';
+	}
+	html += '</tbody></table>';
+	$("#top5posrise_subj").html(html);
+	
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+	for (i = 0; i < top5negdec_subj.length; i++) {
+		html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[top5negdec_subj[i][0]] + '</td><td>' + Math.ceil(top5negdec_subj[i][1]*100)/100 + '</td></tr>';
+	}
+	html += '</tbody></table>';
+	$("#top5negdec_subj").html(html);
+
 
 	var nicknames = Object.keys(autocompletionData);//autocompletionData.map(function(k, v){return k;}, k);
 	// console.log(nicknames);
@@ -15,7 +69,7 @@ $(document).ready(function(){
 	  autoPlay: 1,
 	  bringToFront: true,
 	  speed: 0.1,
-	  autoPlayDelay: 600
+	  autoPlayDelay: 400
 	});
 
 	$(document).on("submit", "#searchForm", function(e) {
@@ -49,7 +103,10 @@ $(document).ready(function(){
 		source: nicknames
 	})
 
-	var datenames = ["Jan", "Feb", "Mar", "Apr"]
+	$(".profile-row").hide();
+
+
+	/*var datenames = ["Jan", "Feb", "Mar", "Apr"]
 	var dates = ['2017-01-05 17:06:00', '2017-02-15 17:06:00', '2017-03-22 17:06:00', '2017-04-10 17:06:00']
 	var sentiments = [13, 14, 11, 10]
 	var nick = "realDonaldTrump"
@@ -114,8 +171,8 @@ $(document).ready(function(){
 
 	var sentiments = [0.15289502164502164, 0.15015405015405014, 0.2790317874692875, 0.25101190476190477, 0.3113612313612314, 0.3521624979958313, 0.24654408274474066, 0.19675324675324676];
 	plotSentimentWeekly("personalSentimentWeekly", sentiments, "NicolaSturgeon");
-
-	var tweets = [
+	*/
+	/*var tweets = [
 					{"date": "2017-03-18 13:23:37", "subjectivity": 0.8033333333333333, "name": "realDonaldTrump", "num_retweets": 14133, "sentiment": -0.004166666666666652}, 
 					{"date": "2017-03-18 13:15:41", "subjectivity": 0.5833333333333334, "name": "realDonaldTrump", "num_retweets": 15703, "sentiment": 0.10000000000000002}, 
 					{"date": "2017-03-17 15:39:10", "subjectivity": 0.75, "name": "realDonaldTrump", "num_retweets": 6703, "sentiment": 1.0}, 
@@ -3318,18 +3375,22 @@ $(document).ready(function(){
 					{"date": "2016-03-29 13:34:36", "subjectivity": 0.7333333333333334, "name": "realDonaldTrump", "num_retweets": 5594, "sentiment": -0.10833333333333332}
 				];
 	plotTweets("allTweets", tweets, "realDonaldTrump");
+	*/
 });
 var renderPolitician = function(nickname, top3sent, top3subj, sentiments, subjectivities, tweets) {
 	$(".stats-row").hide();
+	$(".profile-row").css("visibility", "hidden").show();
+	
 	$(".profile").find("img").attr("src", "/static/" + nickname.toLowerCase() + ".jpg");
 	$(".profile").find(".nickname").attr("href", "https://twitter.com/" + nickname).html("@" + nickname);
+	$(".profile").find(".normal_name").html(autocompletionData[nickname]);
 	plotTweets("allTweets", tweets, nickname);
 	plotSentimentWeekly("personalSentimentWeekly", sentiments, subjectivities, nickname);
 
 	generatePoliticianTable("#similarBySentiment", top3sent);
 	generatePoliticianTable("#similarBySubjectivity", top3subj);
 
-	$(".profile-row").show();
+	$(".profile-row").css("visibility", "visible");
 }
 
 var plotTweets = function(selector, tweets, nick) {
