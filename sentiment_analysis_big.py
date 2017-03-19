@@ -198,7 +198,7 @@ def get_people_biggest_change(polit_weekly_scores):
     for name in polit_weekly_scores:
         pol_tuples.append([name, polit_weekly_scores[name][0]-polit_weekly_scores[name][1]])
     # list of lists of two items: the name and the change in the score
-    pol_tuples.sort(reverse=True)
+    pol_tuples.sort(key=lambda x: x[1], reverse=True)
     return pol_tuples
 
 
