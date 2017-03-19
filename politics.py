@@ -44,11 +44,12 @@ def overview():
         return render_template('overview.html', today=today, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
 
 
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
 
 """
 HOW TO RUN THE WEB APP ON LOCAL SERVER:
-set FLASK_APP=politics.py
-python -m flask run
+python politics.py
 
 * Running on http://127.0.0.1:5000/
 """
