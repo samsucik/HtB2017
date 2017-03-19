@@ -41,7 +41,7 @@ def overview():
         The scores for both weekly sentiment and subjectivity for the given
         politician as a list.
         """
-        return "qwerty"
+        # return "qwerty"
 
 
         # open the json file and get the data
