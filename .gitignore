@@ -214,4 +214,11 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
 key.py
+
+#Server deployment files
+htb17env
+wsgi.py
+HtB2017.ini
+
