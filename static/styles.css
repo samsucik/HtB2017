@@ -53,6 +53,10 @@
 .container {
   width: 100%;
   padding: 0; }
+  .container .graph {
+    position: relative; }
+    .container .graph.other-personal {
+      padding: 0; }
 
 /* Add a gray background color and some padding to the footer */
 footer {
@@ -107,7 +111,12 @@ footer {
   height: 300px;
   position: absolute;
   right: 0;
-  z-index: 1000; }
+  top: 0;
+  z-index: 10; }
+
+.divider {
+  height: 40px;
+  background: #0084b4; }
 
 #carousel .cloud9-item, #buttons button {
   cursor: pointer; }

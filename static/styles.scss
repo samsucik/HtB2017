@@ -73,6 +73,13 @@ $blue_l: #1dcaff;
 .container {
   width: 100%;
   padding: 0;//15px;
+
+  .graph {
+    position: relative;
+    &.other-personal {
+      padding: 0;
+    }
+  }
 }
 
 /* Add a gray background color and some padding to the footer */
@@ -124,6 +131,10 @@ $row-height: 300px;
   }
 }
 
+.stats-row {
+  
+}
+
 .bar {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00f000+0,dcff00+54,ff0000+100 */
   background: #00f000; /* Old browsers */
@@ -136,7 +147,13 @@ $row-height: 300px;
   height: 300px;
   position: absolute;
   right: 0;
-  z-index: 1000;
+  top: 0;
+  z-index: 10;
+}
+
+.divider {
+  height: 40px;
+  background: $blue;
 }
 
 #carousel .cloud9-item, #buttons button {
