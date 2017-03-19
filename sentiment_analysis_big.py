@@ -181,7 +181,7 @@ def get_last_emotions_ranking(polit_weekly_scores):
     last_scores = []
     for name in polit_weekly_scores:
         last_scores.append([name, polit_weekly_scores[name][0]])
-    last_scores.sort(key=lambda x: x[1])
+    last_scores.sort(key=lambda x: x[1], reverse=True)
     # list of lists of two items: the name and the final weekly score
     return last_scores
 
@@ -190,7 +190,7 @@ def get_last_subj_ranking(polit_weekly_scores):
     last_scores = []
     for name in polit_weekly_scores:
         last_scores.append([name, polit_weekly_scores[name][0]])
-    last_scores.sort(key=lambda x: x[1])
+    last_scores.sort(key=lambda x: x[1], reverse=True)
     return last_scores
 
 def get_people_biggest_change(polit_weekly_scores):
