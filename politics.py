@@ -99,17 +99,15 @@ def overview():
             top5neg_subj = last_subj_ranking[-5:]
             top5posrise_subj = changes_subj[:5]
             top5negdec_subj = changes_subj[-5:]
-            return jsonify(
-                           politicians_dct=politicians_dct,
-                           top5posit_sent = top5posit_sent,
-                           top5neg_sent = top5neg_sent,
-                           top5posrise_sent = top5posrise_sent,
-                           top5negdec_sent = top5negdec_sent,
-                           top5posit_subj = top5posit_subj,
-                           top5neg_subj = top5neg_subj,
-                           top5posrise_subj = top5posrise_subj,
-                           top5negdec_subj = top5negdec_subj
-                          )
+            return render_template('index.html', politicians_dct=politicians_dct,
+                                    top5posit_sent = top5posit_sent,
+                                    top5neg_sent = top5neg_sent,
+                                    top5posrise_sent = top5posrise_sent,
+                                    top5negdec_sent = top5negdec_sent,
+                                    top5posit_subj = top5posit_subj,
+                                    top5neg_subj = top5neg_subj,
+                                    top5posrise_subj = top5posrise_subj,
+                                    top5negdec_subj = top5negdec_subj)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
