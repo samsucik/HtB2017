@@ -17,6 +17,11 @@ def overview():
     # "CoryBooker":[1.0, 0.5, 0.3], "JohnCornyn":[1.0, 0.5, 0.3, -0.2, -0.5],
     # "SenGillibrand":[1.0, 0.5, 0.3, -0.2, -0.5], "SenWarren":[1.0, 0.5, 0.3, -0.2, -0.5],
     # "ChrisMurphyCT":[1.0, 0.5, 0.3, -0.2, -0.5], "SpeakerRyan":[1.0, 0.5, 0.3]}
+    politicians_dct = {"realDonaldTrump": "Donald J. Trump", "BernieSanders": "Bernie Sanders",
+    "HillaryClinton": "Hillary Clinton", "theresa_may": "Theresa May",
+    "NicolaSturgeon": "Nicola Sturgeon", "tedcruz": "Ted Cruz", "potus44": "Barack Obama",
+    "CoryBooker": "Cory Booker", "JohnCornyn": "John Cornyn", "SenGillibrand": "Kirsten Gillibrand",
+    "SenWarren": "Elizabeth Warren", "ChrisMurphyCT": "Chris Murphy", "SpeakerRyan": "Paul Ryan"}
     if request.method == 'POST':
         # sentiments, dates - both lists, retweets, nick
         return "Not implemented yet."
@@ -47,7 +52,7 @@ def overview():
 
         # open the json file and get the data
         # receive nick, send stuff
-        return render_template('index.html', today=today, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
+        return render_template('index.html', today=today, politicians_dct=politicians_dct, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
 
 
 if __name__ == "__main__":
