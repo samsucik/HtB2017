@@ -67,7 +67,7 @@ def overview():
                            top3subj=top3subj,
                            sentiment_scores=sentiment_scores[polit_name],
                            subj_scores=subj_scores[polit_name],
-                           tweets_by_politicians=tweets_by_politicians
+                           tweets_by_politician=tweets_by_politicians[polit_name]
                           )
             # return render_template('index.html', )
         except:
