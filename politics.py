@@ -3,6 +3,7 @@ from flask import request
 from flask import render_template
 from datetime import datetime
 import sentiment_analysis_big
+from flask import jsonify
 
 import json
 app = Flask(__name__)
@@ -24,36 +25,53 @@ def overview():
     "SenWarren": "Elizabeth Warren", "ChrisMurphyCT": "Chris Murphy", "SpeakerRyan": "Paul Ryan"}
     if request.method == 'POST':
         # sentiments, dates - both lists, retweets, nick
-        return "Not implemented yet."
+        return "We do not use post requests currently."
     else:
-        polit_name = "realDonaldTrump" # request.args.get('politician')
-        with open('sentiment_weekly_big.json','r') as f:
-            sentiment_scores = json.load(f)
-        with open('subj_weekly_big.json','r') as f:
-            subj_scores = json.load(f)
-        with open('sentiment_tweets_big_by_person.json','r') as fl:
-            tweets_by_politicians = json.load(fl)
-        """For every politician we have a list of tweet details:
-         {'date': date, 'name': name, 'num_retweets': retweets, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
-        """
-        last_emotions_ranking = sentiment_analysis_big.get_last_emotions_ranking(sentiment_scores)
-        last_subj_ranking = sentiment_analysis_big.get_last_subj_ranking(subj_scores)
-        similar_people_sent = sentiment_analysis_big.get_similar_people(polit_name, sentiment_scores)
-        similar_people_subj = sentiment_analysis_big.get_similar_people_subj(polit_name, subj_scores)
-        changes_em = sentiment_analysis_big.get_people_biggest_change(sentiment_scores)
-        changes_subj = sentiment_analysis_big.get_people_biggest_change(subj_scores)
-        """What we need?
+        try:
+            polit_name = request.args.get('politician')
+            with open('sentiment_weekly_big.json','r') as f:
+                sentiment_scores = json.load(f)
+            with open('subj_weekly_big.json','r') as f:
+                subj_scores = json.load(f)
+            with open('sentiment_tweets_big_by_person.json','r') as fl:
+                tweets_by_politicians = json.load(fl)
+            """For every politician we have a list of tweet details:
+             {'date': date, 'name': name, 'num_retweets': retweets, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
+            """
+            last_emotions_ranking = sentiment_analysis_big.get_last_emotions_ranking(sentiment_scores)
+            last_subj_ranking = sentiment_analysis_big.get_last_subj_ranking(subj_scores)
+            similar_people_sent = sentiment_analysis_big.get_similar_people(polit_name, sentiment_scores)
+            similar_people_subj = sentiment_analysis_big.get_similar_people_subj(polit_name, subj_scores)
+            changes_em = sentiment_analysis_big.get_people_biggest_change(sentiment_scores)
+            changes_subj = sentiment_analysis_big.get_people_biggest_change(subj_scores)
+            """What we need?
 
-        The scores for both weekly sentiment and subjectivity for the given
-        politician as a list.
-        """
-        # return "qwerty"
+            The scores for both weekly sentiment and subjectivity for the given
+            politician as a list.
+            """
+            # return "qwerty"
+            top3sent = list(map(lambda x: [x[1], x[2]], similar_people_sent[1:4]))
+            """top3sent is a list of tuples containing (name, similarity) each
+            the same for top3subj.
+            """
+            top3subj = list(map(lambda x: [x[1], x[2]], similar_people_subj[1:4]))
 
 
-        # open the json file and get the data
-        # receive nick, send stuff
-        return render_template('index.html', today=today, politicians_dct=politicians_dct, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
-
+            # open the json file and get the data
+            # receive nick, send stuff
+            # pass also data for the most similar politicians
+            return jsonify(
+                           today=today,
+                           politicians_dct=politicians_dct,
+                           top3sent=top3sent,
+                           top3subj=top3subj,
+                           sentiment_scores=sentiment_scores[polit_name],
+                           subj_scores=subj_scores[polit_name],
+                           tweets_by_politician=tweets_by_politicians[polit_name]
+                          )
+            # return render_template('index.html', )
+        except:
+            # display the main page
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

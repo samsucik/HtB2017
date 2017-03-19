@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from statistics import mean
 import pandas as pd
 import os
+import numpy as np
 
 # number of tweets in a given week
 # biggest changes it emotions, subjectivity
@@ -150,6 +151,7 @@ def get_similar_people(politician, polit_weekly_scores):
     last_scores = []
     for name in polit_weekly_scores:
         last_scores.append((name, polit_weekly_scores[name][:2]))
+    # take longer time data, e.g. half a year
     distances = [(((i[1][0]-polit_last_two_scores[0])**2 + (i[1][1]-polit_last_two_scores[1])**2)**0.5, i[0]) for i in last_scores]
     distances.sort(key=lambda x: x[0])
     similar = map(lambda x: (x[0], x[1], 1.0/(1.0+x[0])), distances)
@@ -157,12 +159,17 @@ def get_similar_people(politician, polit_weekly_scores):
 
 def get_similar_people_subj(politician, polit_weekly_scores):
     """Find politicians with a similar evolution of subjectivity in twitter messages
-    over past two weeks to a given politician."""
-    polit_last_two_scores = polit_weekly_scores[politician][:2]
+    over past n weeks to a given politician.
+    Returns: list of tuples (euclidean dst, nickname, similarity)
+    """
+    num_weeks = 20
+    polit_last_n_scores = polit_weekly_scores[politician][:num_weeks]
     last_scores = []
     for name in polit_weekly_scores:
-        last_scores.append((name, polit_weekly_scores[name][:2]))
-    distances = [(((i[1][0]-polit_last_two_scores[0])**2 + (i[1][1]-polit_last_two_scores[1])**2)**0.5, i[0]) for i in last_scores]
+        last_scores.append((name, polit_weekly_scores[name][:num_weeks]))
+    distances = [(np.linalg.norm(i[1]-polit_last_n_scores), i[0]) for i in last_scores]
+
+    #distances = [(((i[1][0]-polit_last_two_scores[0])**2 + (i[1][1]-polit_last_two_scores[1])**2)**0.5, i[0]) for i in last_scores]
     distances.sort(key=lambda x: x[0])
     similar = map(lambda x: (x[0], x[1], 1.0/(1.0+x[0])), distances)
     return list(similar)
