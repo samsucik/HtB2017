@@ -77,9 +77,9 @@ def get_weekly_sentiments():
                 polit_weekly_scores[polit].append(0)
             else:
                 polit_weekly_scores[polit].append(mean(scores))
-    print("Weekly sentiment scores:")
+    # print("Weekly sentiment scores:")
     # from -1 to 1
-    print(polit_weekly_scores)
+    # print(polit_weekly_scores)
     with open('sentiment_weekly.json','w') as f:
         json.dump(polit_weekly_scores, f)
     return(polit_weekly_scores)
@@ -131,9 +131,9 @@ def get_weekly_subjectivity():
                 polit_weekly_scores[polit].append(0.5)
             else:
                 polit_weekly_scores[polit].append(mean(scores))
-    print("Weekly subjectivity scores:")
+    # print("Weekly subjectivity scores:")
     # from 0 (very objective) to 1 (very subjective)
-    print(polit_weekly_scores)
+    # print(polit_weekly_scores)
     with open('subj_weekly.json','w') as f:
         json.dump(polit_weekly_scores, f)
     return(polit_weekly_scores)
@@ -178,13 +178,13 @@ def get_last_subj_ranking(polit_weekly_scores):
     last_scores.sort(key=lambda x: x[1])
     return last_scores
 
-a = get_weekly_sentiments()
-b = get_weekly_subjectivity()
-print("Emotions/sentiment ranking")
-print(get_last_emotions_ranking(a))
-print("Subjectivity ranking:")
-print(get_last_subj_ranking(b))
-print("Most similar people to Donald Trump in terms of emotions:")
-print(get_similar_people('Donald J. Trump', a))
-print("Most similar people to Donald Trump in terms of subjectivity:")
-print(get_similar_people('Donald J. Trump', b))
+# a = get_weekly_sentiments()
+# b = get_weekly_subjectivity()
+# print("Emotions/sentiment ranking")
+# print(get_last_emotions_ranking(a))
+# print("Subjectivity ranking:")
+# print(get_last_subj_ranking(b))
+# print("Most similar people to Donald Trump in terms of emotions:")
+# print(get_similar_people('Donald J. Trump', a))
+# print("Most similar people to Donald Trump in terms of subjectivity:")
+# print(get_similar_people('Donald J. Trump', b))
