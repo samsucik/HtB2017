@@ -95,13 +95,13 @@ def overview():
             # list of lists of two items: the name and the change in the score
             changes_subj = sentiment_analysis_big.get_people_biggest_change(subj_scores)
             top5posit_sent = last_emotions_ranking[:5]
-            top5neg_sent = last_emotions_ranking[-5:]
+            top5neg_sent = last_emotions_ranking[-5:][::-1]
             top5posrise_sent = changes_em[:5]
-            top5negdec_sent = changes_em[-5:]
+            top5negdec_sent = changes_em[-5:][::-1]
             top5posit_subj = last_subj_ranking[:5]
-            top5neg_subj = last_subj_ranking[-5:]
+            top5neg_subj = last_subj_ranking[-5:][::-1]
             top5posrise_subj = changes_subj[:5]
-            top5negdec_subj = changes_subj[-5:]
+            top5negdec_subj = changes_subj[-5:][::-1]
             return render_template('index.html', politicians_dct=politicians_dct,
                                     top5posit_sent = top5posit_sent,
                                     top5neg_sent = top5neg_sent,
