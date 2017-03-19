@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Make Politicians Sentimental Again</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/styles.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script src="//cdn.plot.ly/plotly-latest.min.js"></script>
+  	<script type="text/javascript" src="/static/cloud9carousel/jquery.cloud9carousel.js"></script>
+  	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+  	<script type="text/javascript" src="/static/script.js"></script>
+</head>
+<body>
+    <div id="topCarousel">
+	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
+	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
+	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
+	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
+	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
+	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
+	  <img class="cloud9-item" src="/static/trump.jpg" alt="Item #1">
+	</div>
+	  
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	  	<form id="searchForm">
+	        <input type="text" data-provide="typeahead" id="search" autocomplete="off" placeholder="find a politician...">
+	        <button type="submit" id="searchButton" class="btn">
+	        	<span class="glyphicon glyphicon-search">
+	        </button>
+	  	</form>
+	  </div>
+	</nav>
+
+	<div class="container text-center profile-row">  
+		<div class="col-lg-3 profile">
+			<img src=".//static/nicola.jpg" class="image">
+			<br>
+			<a class="nickname" href="https://twitter.com/NicolaSturgeon">@NicolaSturgeon</a>
+		</div>
+		<div class="bar"></div>
+		<div class="col-lg-9 graph personal" id="personalSentimentWeekly">
+		
+		</div>
+	  <!-- <div class="row">
+	  	<div id="graph1"></div>
+	  </div> -->
+	</div>
+
+	<footer class="container-fluid text-center">
+	  "Make Politicians Sentimental Again!" by David, Ondro, Brano &amp; Sam
+	</footer>
+
+</body>
+</html>

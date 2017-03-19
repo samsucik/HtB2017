@@ -46,7 +46,7 @@ def overview():
 
         # open the json file and get the data
         # receive nick, send stuff
-        # return render_template('overview.html', today=today, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
+        return render_template('index.html', today=today, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
 
 
 if __name__ == "__main__":
