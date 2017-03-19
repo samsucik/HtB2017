@@ -27,7 +27,7 @@ def overview():
         # sentiments, dates - both lists, retweets, nick
         return "We do not use post requests currently."
     else:
-        try:
+        if 'politician' in request.args:
             polit_name = request.args.get('politician')
             with open('sentiment_weekly_big.json','r') as f:
                 sentiment_scores = json.load(f)
@@ -49,7 +49,6 @@ def overview():
             The scores for both weekly sentiment and subjectivity for the given
             politician as a list.
             """
-            # return "qwerty"
             top3sent = list(map(lambda x: [x[1], x[2]], similar_people_sent[1:4]))
             """top3sent is a list of tuples containing (name, similarity) each
             the same for top3subj.
@@ -70,7 +69,7 @@ def overview():
                            tweets_by_politician=tweets_by_politicians[polit_name]
                           )
             # return render_template('index.html', )
-        except:
+        else:
             """
             Interesting information to use: both for sent and subj
             top5posit
@@ -87,9 +86,13 @@ def overview():
             """For every politician we have a list of tweet details:
              {'date': date, 'name': name, 'num_retweets': retweets, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
             """
+            # list of lists of two items: the name and the final weekly score
             last_emotions_ranking = sentiment_analysis_big.get_last_emotions_ranking(sentiment_scores)
+            # list of lists of two items: the name and the final weekly score
             last_subj_ranking = sentiment_analysis_big.get_last_subj_ranking(subj_scores)
+            # list of lists of two items: the name and the change in the score
             changes_em = sentiment_analysis_big.get_people_biggest_change(sentiment_scores)
+            # list of lists of two items: the name and the change in the score
             changes_subj = sentiment_analysis_big.get_people_biggest_change(subj_scores)
             top5posit_sent = last_emotions_ranking[:5]
             top5neg_sent = last_emotions_ranking[-5:]

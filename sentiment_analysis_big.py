@@ -83,9 +83,9 @@ def get_weekly_sentiments():
                 polit_weekly_scores[polit].append(0)
             else:
                 polit_weekly_scores[polit].append(mean(scores))
-    print("Weekly sentiment scores:")
+    # print("Weekly sentiment scores:")
     # from -1 to 1
-    print(polit_weekly_scores)
+    # print(polit_weekly_scores)
     with open('sentiment_weekly_big.json','w') as f:
         json.dump(polit_weekly_scores, f)
     return(polit_weekly_scores)
@@ -137,9 +137,9 @@ def get_weekly_subjectivity():
                 polit_weekly_scores[polit].append(0.5)
             else:
                 polit_weekly_scores[polit].append(mean(scores))
-    print("Weekly subjectivity scores:")
+    # print("Weekly subjectivity scores:")
     # from 0 (very objective) to 1 (very subjective)
-    print(polit_weekly_scores)
+    # print(polit_weekly_scores)
     with open('subj_weekly_big.json','w') as f:
         json.dump(polit_weekly_scores, f)
     return(polit_weekly_scores)
@@ -147,12 +147,14 @@ def get_weekly_subjectivity():
 def get_similar_people(politician, polit_weekly_scores):
     """Find politicians with a similar evolution of emotions in twitter messages
     over past two weeks to a given politician."""
-    polit_last_two_scores = polit_weekly_scores[politician][:2]
+    num_weeks = 20
+    polit_last_n_scores = polit_weekly_scores[politician][:num_weeks]
     last_scores = []
     for name in polit_weekly_scores:
-        last_scores.append((name, polit_weekly_scores[name][:2]))
-    # take longer time data, e.g. half a year
-    distances = [(((i[1][0]-polit_last_two_scores[0])**2 + (i[1][1]-polit_last_two_scores[1])**2)**0.5, i[0]) for i in last_scores]
+        last_scores.append((name, polit_weekly_scores[name][:num_weeks]))
+    distances = [(np.linalg.norm(np.array(i[1])-np.array(polit_last_n_scores)), i[0]) for i in last_scores]
+
+    #distances = [(((i[1][0]-polit_last_two_scores[0])**2 + (i[1][1]-polit_last_two_scores[1])**2)**0.5, i[0]) for i in last_scores]
     distances.sort(key=lambda x: x[0])
     similar = map(lambda x: (x[0], x[1], 1.0/(1.0+x[0])), distances)
     return list(similar)
@@ -167,7 +169,7 @@ def get_similar_people_subj(politician, polit_weekly_scores):
     last_scores = []
     for name in polit_weekly_scores:
         last_scores.append((name, polit_weekly_scores[name][:num_weeks]))
-    distances = [(np.linalg.norm(i[1]-polit_last_n_scores), i[0]) for i in last_scores]
+    distances = [(np.linalg.norm(np.array(i[1])-np.array(polit_last_n_scores)), i[0]) for i in last_scores]
 
     #distances = [(((i[1][0]-polit_last_two_scores[0])**2 + (i[1][1]-polit_last_two_scores[1])**2)**0.5, i[0]) for i in last_scores]
     distances.sort(key=lambda x: x[0])
@@ -180,6 +182,7 @@ def get_last_emotions_ranking(polit_weekly_scores):
     for name in polit_weekly_scores:
         last_scores.append([name, polit_weekly_scores[name][0]])
     last_scores.sort(key=lambda x: x[1])
+    # list of lists of two items: the name and the final weekly score
     return last_scores
 
 def get_last_subj_ranking(polit_weekly_scores):
@@ -194,6 +197,7 @@ def get_people_biggest_change(polit_weekly_scores):
     pol_tuples = []
     for name in polit_weekly_scores:
         pol_tuples.append([name, polit_weekly_scores[name][0]-polit_weekly_scores[name][1]])
+    # list of lists of two items: the name and the change in the score
     pol_tuples.sort(reverse=True)
     return pol_tuples
 
