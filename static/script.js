@@ -1,14 +1,14 @@
 var blue = '#0084b4';
 $(document).ready(function(){
 
-	// var nicknames = Object.keys(autocompletionData);//autocompletionData.map(function(k, v){return k;}, k);
+	var nicknames = Object.keys(autocompletionData);//autocompletionData.map(function(k, v){return k;}, k);
 	// console.log(nicknames);
 
 	Plotly.setPlotConfig({
 	  modeBarButtonsToRemove: ['sendDataToCloud', 'hoverCompareCartesian', 'lasso2d', 'select2d', 'resetScale2d', 'hoverClosestCartesian']
 	});
 
-	var nicknames = ["belize", "buchanan", "bingbingbing", "bernardo", "bilbo", "beast", "benedict", "realDonaldTrump", "bernie", "hillary", "angela", "nigel"]
+	//var nicknames = ["belize", "buchanan", "bingbingbing", "bernardo", "bilbo", "beast", "benedict", "realDonaldTrump", "bernie", "hillary", "angela", "nigel"]
 	$("#topCarousel").Cloud9Carousel( {
 	  // buttonLeft: $("#buttons > .left"),
 	  // buttonRight: $("#buttons > .right"),
@@ -3326,6 +3326,9 @@ var renderPolitician = function(nickname, top3sent, top3subj, sentiments, subjec
 	plotTweets("allTweets", tweets, nickname);
 	plotSentimentWeekly("personalSentimentWeekly", sentiments, subjectivities, nickname);
 
+	generatePoliticianTable("#similarBySentiment", top3sent);
+	generatePoliticianTable("#similarBySubjectivity", top3subj);
+
 	$(".profile-row").show();
 }
 
@@ -3424,7 +3427,7 @@ var plotSentimentWeekly = function(selector, sentiments, subjectivities, nick) {
 		type: 'scatter',
 		marker: {
 		    color: blue,
-		    size: 15
+		    size: 10
 		},
 		line: {
 			shape: 'spline',
@@ -3438,7 +3441,7 @@ var plotSentimentWeekly = function(selector, sentiments, subjectivities, nick) {
 		type: 'scatter',
 		marker: {
 		    color: 'rgb(255,140,0)',
-		    size: 15
+		    size: 10
 		},
 		line: {
 			shape: 'spline'
@@ -3457,7 +3460,7 @@ var plotSentimentWeekly = function(selector, sentiments, subjectivities, nick) {
 		yaxis: {
 			showgrid: true,
 			fixedrange: true,
-			range: [-1,1],
+			range: [-1.2,1.2],
 			zeroline: true,
 			title: 'sentiment &amp; subjectivity',
 			showticklabels: false
@@ -3488,4 +3491,13 @@ var plotSentimentWeekly = function(selector, sentiments, subjectivities, nick) {
 		}
 	};
 	Plotly.newPlot(selector, plotdata, layout);
+}
+
+var generatePoliticianTable = function(selector, data) {
+	var html = '<table class="table"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Similarity</th></tr></thead><tbody>';
+	for (i = 0; i < data.length; i++) {
+		html += '<tr><th scope="row">' + (i+1) + '</th><td>' + autocompletionData[data[i][0]] + '</td><td>' + Math.ceil(data[i][1]*100) + '%</td></tr>';
+	}
+	html += '</tbody></table>';
+	$(selector).html(html);
 }
