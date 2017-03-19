@@ -26,6 +26,11 @@ def overview():
             sentiment_scores = json.load(f)
         with open('subj_weekly_big.json','r') as f:
             subj_scores = json.load(f)
+        with open('sentiment_tweets_big_by_person.json','r') as fl:
+            tweets_by_politicians = json.load(fl)
+        """For every politician we have a list of tweet details:
+         {'date': date, 'name': name, 'num_retweets': retweets, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
+        """
         last_emotions_ranking = sentiment_analysis_big.get_last_emotions_ranking(sentiment_scores)
         last_subj_ranking = sentiment_analysis_big.get_last_subj_ranking(subj_scores)
         similar_people_sent = sentiment_analysis_big.get_similar_people(polit_name, sentiment_scores)

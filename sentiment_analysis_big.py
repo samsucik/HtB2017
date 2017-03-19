@@ -5,6 +5,8 @@ from statistics import mean
 import pandas as pd
 import os
 
+# number of tweets in a given week
+# biggest changes it emotions, subjectivity
 def create_json_big():
     records = []
     files = os.listdir('tweets')
@@ -16,10 +18,21 @@ def create_json_big():
             tweet = str(data.ix[tt]['text'])
             retweets = int(data.ix[tt]['retweet_count'])
             tweet_t = TextBlob(tweet)
-            record = {'date': date, 'name': name, 'num_retweets': retweets, 'tweet': tweet, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
+            # record = {'date': date, 'name': name, 'num_retweets': retweets, 'tweet': tweet, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
+            record = {'date': date, 'name': name, 'num_retweets': retweets, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
             records.append(record)
     with open('sentiment_tweets_big.json','w') as f:
         json.dump(records, f)
+    tweets_by_politicians = {}
+    for record in records:
+        if record['name'] not in tweets_by_politicians:
+            tweets_by_politicians[record['name']] = []
+        tweets_by_politicians[record['name']].append(record)
+    for politician in tweets_by_politicians:
+        tweets_by_politicians[politician].sort(key=lambda x: x['date'], reverse=True)
+    # now store it to json file
+    with open('sentiment_tweets_big_by_person.json','w') as fl:
+        json.dump(tweets_by_politicians, fl)
 
 def get_weekly_sentiments():
     """The output is a dictionary with keys the names of the politicians
@@ -49,8 +62,9 @@ def get_weekly_sentiments():
         tweets_by_politicians[record['name']].append(record)
     for politician in tweets_by_politicians:
         tweets_by_politicians[politician].sort(key=lambda x: x['date'], reverse=True)
-    for politician in tweets_by_politicians:
-        tweets_by_politicians[politician].sort(key=lambda x: x['date'], reverse=True)
+    # now store it to json file
+    with open('sentiment_tweets_big_by_person.json','w') as fl:
+        json.dump(tweets_by_politicians, fl)
     for polit in polit_weekly_tweets:
         # the next will be changed later to something better
         today = datetime.strptime('2017-03-19 18:26:12', '%Y-%m-%d %H:%M:%S')
