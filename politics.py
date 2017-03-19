@@ -71,7 +71,45 @@ def overview():
                           )
             # return render_template('index.html', )
         except:
-            # display the main page
+            """
+            Interesting information to use: both for sent and subj
+            top5posit
+            top5neg
+            top5posrise
+            top5negdec
+            """
+            with open('sentiment_weekly_big.json','r') as f:
+                sentiment_scores = json.load(f)
+            with open('subj_weekly_big.json','r') as f:
+                subj_scores = json.load(f)
+            with open('sentiment_tweets_big_by_person.json','r') as fl:
+                tweets_by_politicians = json.load(fl)
+            """For every politician we have a list of tweet details:
+             {'date': date, 'name': name, 'num_retweets': retweets, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
+            """
+            last_emotions_ranking = sentiment_analysis_big.get_last_emotions_ranking(sentiment_scores)
+            last_subj_ranking = sentiment_analysis_big.get_last_subj_ranking(subj_scores)
+            changes_em = sentiment_analysis_big.get_people_biggest_change(sentiment_scores)
+            changes_subj = sentiment_analysis_big.get_people_biggest_change(subj_scores)
+            top5posit_sent = last_emotions_ranking[:5]
+            top5neg_sent = last_emotions_ranking[-5:]
+            top5posrise_sent = changes_em[:5]
+            top5negdec_sent = changes_em[-5:]
+            top5posit_subj = last_subj_ranking[:5]
+            top5neg_subj = last_subj_ranking[-5:]
+            top5posrise_subj = changes_subj[:5]
+            top5negdec_subj = changes_subj[-5:]
+            return jsonify(
+                           politicians_dct=politicians_dct,
+                           top5posit_sent = top5posit_sent,
+                           top5neg_sent = top5neg_sent,
+                           top5posrise_sent = top5posrise_sent,
+                           top5negdec_sent = top5negdec_sent,
+                           top5posit_subj = top5posit_subj,
+                           top5neg_subj = top5neg_subj,
+                           top5posrise_subj = top5posrise_subj,
+                           top5negdec_subj = top5negdec_subj
+                          )
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
