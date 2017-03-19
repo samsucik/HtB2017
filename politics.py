@@ -1,16 +1,48 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+from datetime import datetime
+import sentiment_analysis_big
+
+import json
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def overview():
+    today = str(datetime.now())
+    # politicians_sent = {"realDonaldTrump":[1.0, 0.5, 0.3, -0.2, -0.5],
+    # "BernieSanders":[1.0, 0.5, 0.3, -0.2, -0.5], "HillaryClinton":[1.0, 0.5],
+    # "theresa_may":[1.0, 0.5, 0.3, -0.2, -0.5], "NicolaSturgeon":[1.0, 0.5, 0.3, -0.2, -0.5],
+    # "tedcruz":[1.0, 0.5, 0.3, -0.2, -0.5], "potus44":[1.0, 0.5, 0.3, -0.2, -0.5],
+    # "CoryBooker":[1.0, 0.5, 0.3], "JohnCornyn":[1.0, 0.5, 0.3, -0.2, -0.5],
+    # "SenGillibrand":[1.0, 0.5, 0.3, -0.2, -0.5], "SenWarren":[1.0, 0.5, 0.3, -0.2, -0.5],
+    # "ChrisMurphyCT":[1.0, 0.5, 0.3, -0.2, -0.5], "SpeakerRyan":[1.0, 0.5, 0.3]}
     if request.method == 'POST':
-        return "abc" # render_template('hello.html')
+        # sentiments, dates - both lists, retweets, nick
+        return "Not implemented yet."
     else:
-        """We will take all the plots
+        polit_name = request.args.get('politician')
+        with open('sentiment_weekly_big.json','r') as f:
+            sentiment_scores = json.load(f)
+        with open('subj_weekly_big.json','r') as f:
+            subj_scores = json.load(f)
+        last_emotions_ranking = sentiment_analysis_big.get_last_emotions_ranking(sentiment_scores)
+        last_subj_ranking = sentiment_analysis_big.get_last_subj_ranking(subj_scores)
+        similar_people_sent = sentiment_analysis_big.get_similar_people(polit_name, sentiment_scores)
+        similar_people_subj = sentiment_analysis_big.get_similar_people_subj(polit_name, subj_scores)
+
+        """What we need?
+
+        The scores for both weekly sentiment and subjectivity for the given
+        politician as a list.
         """
-        return "abcd" #render_template('hello2.html')
+        # return "qwerty"
+
+
+        # open the json file and get the data
+        # receive nick, send stuff
+        return render_template('overview.html', today=today, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
+
 
 
 """
