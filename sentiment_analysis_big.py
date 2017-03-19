@@ -9,12 +9,12 @@ def create_json_big():
     records = []
     files = os.listdir('tweets')
     for f_name in files:
-        data = pd.read_csv(os.getcwd()+'\\tweets\\' + f_name)
+        data = pd.read_csv(os.path.join(os.getcwd(),'tweets', f_name))
         name = f_name[:-11]
         for tt in range(len(data)):
             date = str(data.ix[tt]['created_at'])
             tweet = str(data.ix[tt]['text'])
-            retweets = 0 #int(data.ix[tt]['retweets'])
+            retweets = int(data.ix[tt]['retweet_count'])
             tweet_t = TextBlob(tweet)
             record = {'date': date, 'name': name, 'num_retweets': retweets, 'tweet': tweet, 'sentiment': tweet_t.sentiment.polarity, 'subjectivity': tweet_t.sentiment.subjectivity}
             records.append(record)
