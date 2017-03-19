@@ -8,7 +8,7 @@ api = tweepy.API(auth)
 
 
 def get_tweets(user):
-    return api.user_timeline(user, count = 150)
+    return api.user_timeline(user, count="5000")
 
 def print_user_tweets(user):
     with open('file.txt', 'a', encoding='utf-8') as file:
