@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def overview():
-    today = str(datetime.now())
+    today = datetime.strptime('2017-03-19 18:26:12', '%Y-%m-%d %H:%M:%S') # str(datetime.now())
     # politicians_sent = {"realDonaldTrump":[1.0, 0.5, 0.3, -0.2, -0.5],
     # "BernieSanders":[1.0, 0.5, 0.3, -0.2, -0.5], "HillaryClinton":[1.0, 0.5],
     # "theresa_may":[1.0, 0.5, 0.3, -0.2, -0.5], "NicolaSturgeon":[1.0, 0.5, 0.3, -0.2, -0.5],
@@ -21,7 +21,7 @@ def overview():
         # sentiments, dates - both lists, retweets, nick
         return "Not implemented yet."
     else:
-        polit_name = request.args.get('politician')
+        polit_name = "realDonaldTrump" # request.args.get('politician')
         with open('sentiment_weekly_big.json','r') as f:
             sentiment_scores = json.load(f)
         with open('subj_weekly_big.json','r') as f:
@@ -36,12 +36,12 @@ def overview():
         The scores for both weekly sentiment and subjectivity for the given
         politician as a list.
         """
-        # return "qwerty"
+        return "qwerty"
 
 
         # open the json file and get the data
         # receive nick, send stuff
-        return render_template('overview.html', today=today, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
+        # return render_template('overview.html', today=today, sentiment_scores=sentiment_scores[polit_name], subj_scores=subj_scores[polit_name])
 
 
 if __name__ == "__main__":
